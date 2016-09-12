@@ -1,0 +1,13 @@
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+
+SET(main_SOURCES
+  main.cpp
+  Step02_LinearFunction.cpp
+  )
+
+ADD_EXECUTABLE(
+  step02
+  ${main_SOURCES}
+  )
+
+FILE(COPY ./input.xml DESTINATION .)

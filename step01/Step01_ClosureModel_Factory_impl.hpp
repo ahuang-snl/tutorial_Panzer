@@ -59,6 +59,10 @@
 
 #include "Step01_LinearFunction.hpp"
 
+// begin modication
+#include "Step01_SinXSinYFunction.hpp"
+// end modification
+
 // ********************************************************************
 // ********************************************************************
 template<typename EvalT>
@@ -146,6 +150,20 @@ buildClosureModels(const std::string& model_id,
 
         found = true;
       }
+
+      // begin modification
+      // a doubly-periodic function on the domain
+      else if(evaluator_type == "SinXSinY Function" ) {
+        double xperiod = plist.get<double>("XPeriod"); 
+        double yperiod  = plist.get<double>("YPeriod"); 
+        
+        RCP<PHX::Evaluator<panzer::Traits> > e =
+	  rcp(new user_app::SinXSinYFunction<EvalT,panzer::Traits>(key,xperiod,yperiod,*ir));
+        evaluators->push_back(e);
+
+        found = true;
+      }
+      // end modification
     }
 
     // fail if you can't find one of the models

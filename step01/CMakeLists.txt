@@ -2,7 +2,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 SET(main_SOURCES
   main.cpp
   Step01_LinearFunction.cpp
-# Step01_SinXSinY.cpp
+  Step01_SinXSinYFunction.cpp
   )
 
 INCLUDE_DIRECTORIES ( ./ ${Trilinos_INCLUDE_DIRS} ${Trilinos_TPL_INCLUDE_DIRS})

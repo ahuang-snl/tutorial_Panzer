@@ -50,10 +50,20 @@
 // Add my equation sets here
 #include "Step01_EquationSet_Projection.hpp"
 
+// begin modification
+#include "Step01_EquationSet_Helmholtz.hpp"
+// end modification
+
 namespace user_app {
 
   PANZER_DECLARE_EQSET_TEMPLATE_BUILDER("Projection", user_app::EquationSet_Projection,
 					EquationSet_Projection)
+
+  // begin modification
+  // macro which builds the Helmholtz equation set
+  PANZER_DECLARE_EQSET_TEMPLATE_BUILDER("Helmholtz", user_app::EquationSet_Helmholtz,
+					EquationSet_Helmholtz)
+  // end modification
 
   class EquationSetFactory : public panzer::EquationSetFactory {
 
@@ -74,6 +84,15 @@ namespace user_app {
       PANZER_BUILD_EQSET_OBJECTS("Projection", user_app::EquationSet_Projection,
 				 EquationSet_Projection)
       
+      // begin modification
+      // macro which builds the objects in the Helmholtz equation set
+      PANZER_BUILD_EQSET_OBJECTS("Helmholtz", user_app::EquationSet_Helmholtz,
+				 EquationSet_Helmholtz)
+	// end modification
+	// question: what does this do? if it's required to be done when 
+        //           the equations are being built anyway, why isn't this done by 
+        //           the PANZER_DECLARE_EQSET_TEMPLATE_BUILDER?
+
       if (!found) {
 	std::string msg = "Error - the \"Equation Set\" with \"Type\" = \"" + params->get<std::string>("Type") +
 	  "\" is not a valid equation set identifier. Please supply the correct factory.\n";
